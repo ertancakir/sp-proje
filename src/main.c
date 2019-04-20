@@ -13,10 +13,20 @@ char *dosya_oku(char *dosya, int boyut){
 		veri[i] = ch;
 		i++;
 	}
+	fclose(fp);
 	return veri;
 }
-void dosya_yaz(char **files, char **content , char){
-	
+void dosya_yaz(char **files, char **content , char * output, int dosya_adet){
+	FILE * fp;
+	fp = fopen(output, "w+");
+
+	for(int i=0;i<dosya_adet;i++){
+		fprintf(fp,files[i]);
+	}
+	for(int i=0;i<dosya_adet;i++){
+		fprintf(fp,content[i]);
+	}
+	fclose(fp);
 }
 
 int komut_calistir(char **args){
@@ -40,7 +50,7 @@ int komut_calistir(char **args){
 
 				char dosya[32];
 				sprintf(dosya, "|%s,%d,%d|", args[konum], 0, size);
-				files[konum - 2] = dosya;
+				files[konum - 2] = strdup(dosya);
 				content[konum - 2] = dosya_oku(args[konum],size);
 
 				konum++;
@@ -51,10 +61,7 @@ int komut_calistir(char **args){
 				free(files);
 				return 0;
 			}
-
-			for (int i = 0; i < dosya_adet; i++){
-				printf("%s - %s", files[i], content[i])
-			}
+			dosya_yaz(files,content,args[konum + 1],dosya_adet);
 			return 1;
 		}
 		else if (strcmp(args[1], "a") == 0){
