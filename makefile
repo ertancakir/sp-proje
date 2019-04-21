@@ -1,10 +1,8 @@
-INC = ./include/libfdr
-LIB = ./include/libfdr
 CC = gcc
-SRC = ./src/main.c
+SRC = ./main.c
 
 all: main
 
 main: $(SRC)
-	$(CC) -I$(INC) $(SRC) -o ./bin/main -L$(LIB) -lfdr -w
+	$(CC) $(SRC) -o ./bin/main -w
 	./bin/main
