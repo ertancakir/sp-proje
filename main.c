@@ -81,7 +81,8 @@ int komut_calistir(char **args){
 			}
 			else{
 				char * uzanti = strrchr(args[konum + 1],'.');
-				if(uzanti != ".sau"){
+				printf("%s\n",uzanti);
+				if(strcmp(uzanti,".sau") != 0){
 					printf("%s cikis bicimi uyumsuz!\n",args[konum + 1]);
 					free(files);
 					free(content);
@@ -93,7 +94,7 @@ int komut_calistir(char **args){
 		}
 		else if (strcmp(args[1], "a") == 0){
 			char * uzanti = strrchr(args[2],'.');
-			if(uzanti != ".sau"){
+			if(strcmp(uzanti,".sau") != 0){
 				printf("%s giris bicimi uyumsuz!\n",args[2]);
 				return 0;
 			}
